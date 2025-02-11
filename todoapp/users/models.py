@@ -51,4 +51,3 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     """
 
     objects = UserManager()
-

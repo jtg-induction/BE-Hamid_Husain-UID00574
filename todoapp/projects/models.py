@@ -1,7 +1,8 @@
 
-from django.db import models
 from django.conf import settings
+from django.db import models
 from users.models import CustomUser
+
 
 class Project(models.Model):
     members = models.ManyToManyField(CustomUser, through='ProjectMember', related_name='projects')
@@ -50,5 +51,3 @@ class ProjectMember(models.Model):
 
     Add string representation for this model with project name and user email/first name.
     """
-
-
