@@ -33,7 +33,7 @@ class Project(models.Model):
 
 class ProjectMember(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE) 
-    member = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    member = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
         constraints = [
