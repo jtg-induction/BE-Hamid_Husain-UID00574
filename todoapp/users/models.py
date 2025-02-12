@@ -18,10 +18,10 @@ class UserManager(BaseUserManager):
             raise ValueError("The email is needed")
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
-        user.set_password(password)  
-        user.save(using=self._db)  
+        user.set_password(password)
+        user.save(using=self._db)
         return user
-    
+
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
@@ -35,8 +35,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=now)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    USERNAME_FIELD = 'email'  
-    REQUIRED_FIELDS = ['first_name', 'last_name']  
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     """
     Needed fields
