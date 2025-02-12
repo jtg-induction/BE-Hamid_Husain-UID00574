@@ -4,12 +4,11 @@ from django.utils.timezone import now
 
 
 class Todo(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             related_name='todos', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=1000)
     done = models.BooleanField(default=False)
     date_created = models.DateTimeField(default=now)
-    date_completed = models.DateTimeField(null=True, blank=True)
+    date_completed = models.DateTimeField(null=True,blank=True)
 
     def __str__(self):
         return f"{self.name}"
