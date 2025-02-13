@@ -89,20 +89,23 @@ DATABASES = {
     u'default': {
         u'ENGINE': u'django.db.backends.postgresql',
         u'NAME': u'mydb',                      # Add database name.
-        u'USER': u'ubuntu',              # Add psql user name. For default use postgres.
-        u'PASSWORD': u'postgres',                  # Add user password if exists.
-        u'HOST': u'',                      # Set to empty string for localhost..
+        # Add psql user name. For default use postgres.
+        u'USER': u'ubuntu',
+        # Add user password if exists.
+        u'PASSWORD': u'postgres',
+        # Set to empty string for localhost..
+        u'HOST': u'',
         u'PORT': u'5432',                  # Psql service running port.
     },
 }
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework.authentication.TokenAuthentication',
+    # ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ),
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }
 

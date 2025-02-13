@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.db import models
-from django.utils.timezone import now
 
 
 class Todo(models.Model):
@@ -8,7 +7,7 @@ class Todo(models.Model):
                              related_name='todos', on_delete=models.CASCADE)
     name = models.CharField(max_length=1000)
     done = models.BooleanField(default=False)
-    date_created = models.DateTimeField(default=now)
+    date_created = models.DateTimeField(auto_now_add=True)
     date_completed = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):

@@ -40,3 +40,9 @@ class TodoDateSerializer (serializers.ModelSerializer):
 
     def get_created_at(self, obj):
         return obj.date_created.strftime("%I:%M %p, %d %b, %Y")
+
+
+class TodoCreateSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = Todo
+        fields = ['id', 'name', 'done', 'date_created', 'user']
