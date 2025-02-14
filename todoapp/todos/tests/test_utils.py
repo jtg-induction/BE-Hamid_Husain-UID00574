@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import connection
 from django.test import TestCase
 
-from todoapp.todos import utils as todos_utils
+import todos.utils as todos_utils
 
 
 class TestSetupMixin(object):
@@ -55,7 +55,8 @@ class ORMUtilTest(TestSetupMixin, TestCase):
         self.assertEqual(
             actual_hit_count,
             1,
-            msg='Expected only 1 db hit got {}'.format(new_db_hit_count - db_hit_count)
+            msg='Expected only 1 db hit got {}'.format(
+                new_db_hit_count - db_hit_count)
         )
         self.assertListEqual(
             list1=data or [],
@@ -1263,7 +1264,8 @@ class ORMUtilTest(TestSetupMixin, TestCase):
         self.assertEqual(
             actual_hit_count,
             1,
-            msg='Expected only 1 db hit got {}'.format(new_db_hit_count - db_hit_count)
+            msg='Expected only 1 db hit got {}'.format(
+                new_db_hit_count - db_hit_count)
         )
         self.assertCountEqual(
             data,
@@ -1272,17 +1274,28 @@ class ORMUtilTest(TestSetupMixin, TestCase):
 
     def test_fetch_projects_details(self):
         expected_data = [
-            {'id': 5, 'name': 'Project E', 'status': 'In progress', 'existing_member_count': 1, 'max_members': 1},
-            {'id': 4, 'name': 'Project D', 'status': 'In progress', 'existing_member_count': 1, 'max_members': 4},
-            {'id': 10, 'name': 'Project J', 'status': 'Completed', 'existing_member_count': 3, 'max_members': 3},
-            {'id': 6, 'name': 'Project F', 'status': 'To be started', 'existing_member_count': 4, 'max_members': 5},
-            {'id': 2, 'name': 'Project B', 'status': 'Completed', 'existing_member_count': 2, 'max_members': 2},
-            {'id': 7, 'name': 'Project G', 'status': 'In progress', 'existing_member_count': 2, 'max_members': 2},
-            {'id': 1, 'name': 'Project A', 'status': 'To be started', 'existing_member_count': 2, 'max_members': 3},
-            {'id': 8, 'name': 'Project H', 'status': 'To be started', 'existing_member_count': 1, 'max_members': 1},
-            {'id': 11, 'name': 'Project K', 'status': 'To be started', 'existing_member_count': 4, 'max_members': 4},
-            {'id': 9, 'name': 'Project I', 'status': 'Completed', 'existing_member_count': 2, 'max_members': 2},
-            {'id': 3, 'name': 'Project C', 'status': 'In progress', 'existing_member_count': 3, 'max_members': 3}
+            {'id': 5, 'name': 'Project E', 'status': 'In progress',
+                'existing_member_count': 1, 'max_members': 1},
+            {'id': 4, 'name': 'Project D', 'status': 'In progress',
+                'existing_member_count': 1, 'max_members': 4},
+            {'id': 10, 'name': 'Project J', 'status': 'Completed',
+                'existing_member_count': 3, 'max_members': 3},
+            {'id': 6, 'name': 'Project F', 'status': 'To be started',
+                'existing_member_count': 4, 'max_members': 5},
+            {'id': 2, 'name': 'Project B', 'status': 'Completed',
+                'existing_member_count': 2, 'max_members': 2},
+            {'id': 7, 'name': 'Project G', 'status': 'In progress',
+                'existing_member_count': 2, 'max_members': 2},
+            {'id': 1, 'name': 'Project A', 'status': 'To be started',
+                'existing_member_count': 2, 'max_members': 3},
+            {'id': 8, 'name': 'Project H', 'status': 'To be started',
+                'existing_member_count': 1, 'max_members': 1},
+            {'id': 11, 'name': 'Project K', 'status': 'To be started',
+                'existing_member_count': 4, 'max_members': 4},
+            {'id': 9, 'name': 'Project I', 'status': 'Completed',
+                'existing_member_count': 2, 'max_members': 2},
+            {'id': 3, 'name': 'Project C', 'status': 'In progress',
+                'existing_member_count': 3, 'max_members': 3}
         ]
         db_hit_count = len(connection.queries)
         data = todos_utils.fetch_projects_details()
@@ -1291,7 +1304,8 @@ class ORMUtilTest(TestSetupMixin, TestCase):
         self.assertEqual(
             actual_hit_count,
             1,
-            msg='Expected only 1 db hit got {}'.format(new_db_hit_count - db_hit_count)
+            msg='Expected only 1 db hit got {}'.format(
+                new_db_hit_count - db_hit_count)
         )
         self.assertCountEqual(
             data,
@@ -1321,7 +1335,8 @@ class ORMUtilTest(TestSetupMixin, TestCase):
         self.assertEqual(
             actual_hit_count,
             1,
-            msg='Expected only 1 db hit got {}'.format(new_db_hit_count - db_hit_count)
+            msg='Expected only 1 db hit got {}'.format(
+                new_db_hit_count - db_hit_count)
         )
         self.assertCountEqual(
             data,
@@ -1349,7 +1364,8 @@ class ORMUtilTest(TestSetupMixin, TestCase):
         self.assertEqual(
             actual_hit_count,
             1,
-            msg='Expected only 1 db hit got {}'.format(new_db_hit_count - db_hit_count)
+            msg='Expected only 1 db hit got {}'.format(
+                new_db_hit_count - db_hit_count)
         )
         self.assertListEqual(
             data,
@@ -1369,7 +1385,8 @@ class ORMUtilTest(TestSetupMixin, TestCase):
         self.assertEqual(
             actual_hit_count,
             1,
-            msg='Expected only 1 db hit got {}'.format(new_db_hit_count - db_hit_count)
+            msg='Expected only 1 db hit got {}'.format(
+                new_db_hit_count - db_hit_count)
         )
         self.assertListEqual(
             data,
@@ -1409,13 +1426,15 @@ class ORMUtilTest(TestSetupMixin, TestCase):
             }
         ]
         db_hit_count = len(connection.queries)
-        data = todos_utils.fetch_completed_todos_with_in_date_range('21-12-2021', '29-12-2021')
+        data = todos_utils.fetch_completed_todos_with_in_date_range(
+            '21-12-2021', '29-12-2021')
         new_db_hit_count = len(connection.queries)
         actual_hit_count = new_db_hit_count - db_hit_count
         self.assertEqual(
             actual_hit_count,
             1,
-            msg='Expected only 1 db hit got {}'.format(new_db_hit_count - db_hit_count)
+            msg='Expected only 1 db hit got {}'.format(
+                new_db_hit_count - db_hit_count)
         )
         self.assertListEqual(
             data,
@@ -1441,7 +1460,8 @@ class ORMUtilTest(TestSetupMixin, TestCase):
         self.assertEqual(
             actual_hit_count,
             1,
-            msg='Expected only 1 db hit got {}'.format(new_db_hit_count - db_hit_count)
+            msg='Expected only 1 db hit got {}'.format(
+                new_db_hit_count - db_hit_count)
         )
         self.assertCountEqual(
             data,
@@ -1455,52 +1475,52 @@ class ORMUtilTest(TestSetupMixin, TestCase):
                  'pending_count': 15, 'completed_count': 9},
                 {'first_name': 'Naveen', 'last_name': 'Kumar', 'email': 'naveenk@joshtechnologygroup.com',
                  'pending_count': 13, 'completed_count': 5}]}, {'project_title': 'Project B', 'report': [
-                {'first_name': 'Amal', 'last_name': 'Raj', 'email': 'amal.raj@joshtechnologygroup.com',
-                 'pending_count': 16, 'completed_count': 3},
-                {'first_name': 'Nikhil', 'last_name': 'Khurana', 'email': 'nikhil.khurana@joshtechnologygroup.com',
-                 'pending_count': 7, 'completed_count': 3}]}, {'project_title': 'Project C', 'report': [
-                {'first_name': 'Chirag', 'last_name': 'Gupta', 'email': 'chirag.gupta@joshtechnologygroup.com',
-                 'pending_count': 10, 'completed_count': 8},
-                {'first_name': 'Naveen', 'last_name': 'Kumar', 'email': 'naveenk@joshtechnologygroup.com',
-                 'pending_count': 13, 'completed_count': 5},
-                {'first_name': 'Sunny', 'last_name': 'Singhal', 'email': 'sunny.singhal@joshtechnologygroup.com',
-                 'pending_count': 22, 'completed_count': 8}]}, {'project_title': 'Project D', 'report': [
-                {'first_name': 'Naveen', 'last_name': 'Kumar', 'email': 'naveenk@joshtechnologygroup.com',
-                 'pending_count': 13, 'completed_count': 5}]}, {'project_title': 'Project E', 'report': [
-                {'first_name': 'Chirag', 'last_name': 'Gupta', 'email': 'chirag.gupta@joshtechnologygroup.com',
-                 'pending_count': 10, 'completed_count': 8}]}, {'project_title': 'Project F', 'report': [
-                {'first_name': 'Chirag', 'last_name': 'Gupta', 'email': 'chirag.gupta@joshtechnologygroup.com',
-                 'pending_count': 10, 'completed_count': 8},
-                {'first_name': 'Gurpreet', 'last_name': 'Singh', 'email': 'gurpreet.singh@joshtechnologygroup.com',
-                 'pending_count': 15, 'completed_count': 9},
-                {'first_name': 'Nikhil', 'last_name': 'Khurana', 'email': 'nikhil.khurana@joshtechnologygroup.com',
-                 'pending_count': 7, 'completed_count': 3},
-                {'first_name': 'Sunny', 'last_name': 'Singhal', 'email': 'sunny.singhal@joshtechnologygroup.com',
-                 'pending_count': 22, 'completed_count': 8}]}, {'project_title': 'Project G', 'report': [
-                {'first_name': 'Amal', 'last_name': 'Raj', 'email': 'amal.raj@joshtechnologygroup.com',
-                 'pending_count': 16, 'completed_count': 3},
-                {'first_name': 'Nikhil', 'last_name': 'Khurana', 'email': 'nikhil.khurana@joshtechnologygroup.com',
-                 'pending_count': 7, 'completed_count': 3}]}, {'project_title': 'Project H', 'report': [
-                {'first_name': 'Naveen', 'last_name': 'Kumar', 'email': 'naveenk@joshtechnologygroup.com',
-                 'pending_count': 13, 'completed_count': 5}]}, {'project_title': 'Project I', 'report': [
-                {'first_name': 'Chirag', 'last_name': 'Gupta', 'email': 'chirag.gupta@joshtechnologygroup.com',
-                 'pending_count': 10, 'completed_count': 8},
-                {'first_name': 'Sunny', 'last_name': 'Singhal', 'email': 'sunny.singhal@joshtechnologygroup.com',
-                 'pending_count': 22, 'completed_count': 8}]}, {'project_title': 'Project J', 'report': [
-                {'first_name': 'Gurpreet', 'last_name': 'Singh', 'email': 'gurpreet.singh@joshtechnologygroup.com',
-                 'pending_count': 15, 'completed_count': 9},
-                {'first_name': 'Naveen', 'last_name': 'Kumar', 'email': 'naveenk@joshtechnologygroup.com',
-                 'pending_count': 13, 'completed_count': 5},
-                {'first_name': 'Nikhil', 'last_name': 'Khurana', 'email': 'nikhil.khurana@joshtechnologygroup.com',
-                 'pending_count': 7, 'completed_count': 3}]}, {'project_title': 'Project K', 'report': [
-                {'first_name': 'Amal', 'last_name': 'Raj', 'email': 'amal.raj@joshtechnologygroup.com',
-                 'pending_count': 16, 'completed_count': 3},
-                {'first_name': 'Chirag', 'last_name': 'Gupta', 'email': 'chirag.gupta@joshtechnologygroup.com',
-                 'pending_count': 10, 'completed_count': 8},
-                {'first_name': 'Naveen', 'last_name': 'Kumar', 'email': 'naveenk@joshtechnologygroup.com',
-                 'pending_count': 13, 'completed_count': 5},
-                {'first_name': 'Nikhil', 'last_name': 'Khurana', 'email': 'nikhil.khurana@joshtechnologygroup.com',
-                 'pending_count': 7, 'completed_count': 3}]}
+                     {'first_name': 'Amal', 'last_name': 'Raj', 'email': 'amal.raj@joshtechnologygroup.com',
+                      'pending_count': 16, 'completed_count': 3},
+                     {'first_name': 'Nikhil', 'last_name': 'Khurana', 'email': 'nikhil.khurana@joshtechnologygroup.com',
+                      'pending_count': 7, 'completed_count': 3}]}, {'project_title': 'Project C', 'report': [
+                          {'first_name': 'Chirag', 'last_name': 'Gupta', 'email': 'chirag.gupta@joshtechnologygroup.com',
+                           'pending_count': 10, 'completed_count': 8},
+                          {'first_name': 'Naveen', 'last_name': 'Kumar', 'email': 'naveenk@joshtechnologygroup.com',
+                           'pending_count': 13, 'completed_count': 5},
+                          {'first_name': 'Sunny', 'last_name': 'Singhal', 'email': 'sunny.singhal@joshtechnologygroup.com',
+                           'pending_count': 22, 'completed_count': 8}]}, {'project_title': 'Project D', 'report': [
+                               {'first_name': 'Naveen', 'last_name': 'Kumar', 'email': 'naveenk@joshtechnologygroup.com',
+                                'pending_count': 13, 'completed_count': 5}]}, {'project_title': 'Project E', 'report': [
+                                    {'first_name': 'Chirag', 'last_name': 'Gupta', 'email': 'chirag.gupta@joshtechnologygroup.com',
+                                     'pending_count': 10, 'completed_count': 8}]}, {'project_title': 'Project F', 'report': [
+                                         {'first_name': 'Chirag', 'last_name': 'Gupta', 'email': 'chirag.gupta@joshtechnologygroup.com',
+                                          'pending_count': 10, 'completed_count': 8},
+                                         {'first_name': 'Gurpreet', 'last_name': 'Singh', 'email': 'gurpreet.singh@joshtechnologygroup.com',
+                                          'pending_count': 15, 'completed_count': 9},
+                                         {'first_name': 'Nikhil', 'last_name': 'Khurana', 'email': 'nikhil.khurana@joshtechnologygroup.com',
+                                          'pending_count': 7, 'completed_count': 3},
+                                         {'first_name': 'Sunny', 'last_name': 'Singhal', 'email': 'sunny.singhal@joshtechnologygroup.com',
+                                          'pending_count': 22, 'completed_count': 8}]}, {'project_title': 'Project G', 'report': [
+                                              {'first_name': 'Amal', 'last_name': 'Raj', 'email': 'amal.raj@joshtechnologygroup.com',
+                                               'pending_count': 16, 'completed_count': 3},
+                                              {'first_name': 'Nikhil', 'last_name': 'Khurana', 'email': 'nikhil.khurana@joshtechnologygroup.com',
+                                               'pending_count': 7, 'completed_count': 3}]}, {'project_title': 'Project H', 'report': [
+                                                   {'first_name': 'Naveen', 'last_name': 'Kumar', 'email': 'naveenk@joshtechnologygroup.com',
+                                                    'pending_count': 13, 'completed_count': 5}]}, {'project_title': 'Project I', 'report': [
+                                                        {'first_name': 'Chirag', 'last_name': 'Gupta', 'email': 'chirag.gupta@joshtechnologygroup.com',
+                                                         'pending_count': 10, 'completed_count': 8},
+                                                        {'first_name': 'Sunny', 'last_name': 'Singhal', 'email': 'sunny.singhal@joshtechnologygroup.com',
+                                                         'pending_count': 22, 'completed_count': 8}]}, {'project_title': 'Project J', 'report': [
+                                                             {'first_name': 'Gurpreet', 'last_name': 'Singh', 'email': 'gurpreet.singh@joshtechnologygroup.com',
+                                                              'pending_count': 15, 'completed_count': 9},
+                                                             {'first_name': 'Naveen', 'last_name': 'Kumar', 'email': 'naveenk@joshtechnologygroup.com',
+                                                              'pending_count': 13, 'completed_count': 5},
+                                                             {'first_name': 'Nikhil', 'last_name': 'Khurana', 'email': 'nikhil.khurana@joshtechnologygroup.com',
+                                                              'pending_count': 7, 'completed_count': 3}]}, {'project_title': 'Project K', 'report': [
+                                                                  {'first_name': 'Amal', 'last_name': 'Raj', 'email': 'amal.raj@joshtechnologygroup.com',
+                                                                   'pending_count': 16, 'completed_count': 3},
+                                                                  {'first_name': 'Chirag', 'last_name': 'Gupta', 'email': 'chirag.gupta@joshtechnologygroup.com',
+                                                                   'pending_count': 10, 'completed_count': 8},
+                                                                  {'first_name': 'Naveen', 'last_name': 'Kumar', 'email': 'naveenk@joshtechnologygroup.com',
+                                                                   'pending_count': 13, 'completed_count': 5},
+                                                                  {'first_name': 'Nikhil', 'last_name': 'Khurana', 'email': 'nikhil.khurana@joshtechnologygroup.com',
+                                                                   'pending_count': 7, 'completed_count': 3}]}
         ]
 
         db_hit_count = len(connection.queries)
@@ -1510,7 +1530,8 @@ class ORMUtilTest(TestSetupMixin, TestCase):
         self.assertEqual(
             actual_hit_count,
             2,
-            msg='Expected only 2 db hit got {}'.format(new_db_hit_count - db_hit_count)
+            msg='Expected only 2 db hit got {}'.format(
+                new_db_hit_count - db_hit_count)
         )
         self.assertListEqual(
             data,
@@ -1571,12 +1592,10 @@ class ORMUtilTest(TestSetupMixin, TestCase):
         self.assertEqual(
             actual_hit_count,
             1,
-            msg='Expected only 1 db hit got {}'.format(new_db_hit_count - db_hit_count)
+            msg='Expected only 1 db hit got {}'.format(
+                new_db_hit_count - db_hit_count)
         )
         self.assertListEqual(
             data,
             expected_data
         )
-
-
-
