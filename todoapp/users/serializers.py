@@ -62,3 +62,15 @@ class ProjectStatsSerializer (serializers.ModelSerializer):
         model = CustomUser
         fields = ['first_name', 'last_name', 'email',
                   'completed_count', 'pending_count']
+
+
+class UserCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'first_name', 'last_name',
+                  'email', 'password', 'date_joined']
+
+
+class UserLoginSerializer(serializers.Serializer):
+    email = serializers.CharField()
+    password = serializers.CharField(write_only=True)

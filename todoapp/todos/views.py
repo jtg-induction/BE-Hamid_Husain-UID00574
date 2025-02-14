@@ -2,6 +2,8 @@ from rest_framework import status
 from rest_framework.exceptions import NotFound
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
 from todos.models import Todo
 from todos.serializers import TodoSerializer, TodoCreateSerializer
@@ -28,6 +30,8 @@ class TodoAPIViewSet(ModelViewSet):
 
     queryset = Todo.objects.all()
     serializer_class = TodoCreateSerializer
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
 
     def get_queryset(self):
         return Todo.objects.filter(user=self.request.user)
@@ -41,7 +45,7 @@ class TodoAPIViewSet(ModelViewSet):
         data = request.data.copy()
         data['user'] = request.user.id
 
-        serializer = TodoCreateSerializer(data=data)
+        serializer = self.get_serializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -63,11 +67,12 @@ class TodoAPIViewSet(ModelViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self, request, *args, **kwargs):
-        todo = self.get_object()
+        try:
+            todo = self.get_object()
+        except Todo.DoesNotExist:
+            raise NotFound(
+                "Todo not found or you don't have permission to delete this Todo.")
 
-        if todo.user != request.user:
-            return Response({"detail": "You do not have permission to delete this Todo."},
-                            status=status.HTTP_403_FORBIDDEN)
         todo.delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
