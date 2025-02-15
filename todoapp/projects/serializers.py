@@ -14,20 +14,23 @@ class ProjectSerializer (serializers.ModelSerializer):
                   'existing_member_count', 'max_members']
 
     def get_status(self, obj):
-        CHOICES = ["To be started", "In Progress", "Completed"]
+        CHOICES = ["To be started", "In progress", "Completed"]
         return CHOICES[obj.status]
 
 
 class ProjectMemberStartsASerializer (serializers.ModelSerializer):
-    status = serializers.SerializerMethodField()
+    done = serializers.SerializerMethodField()
+    project_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
-        fields = ['id', 'name', 'status', 'max_members']
+        fields = ['project_name', 'done', 'max_members']
 
-    def get_status(self, obj):
-        CHOICES = ["To be started", "In Progress", "Completed"]
-        return CHOICES[obj.status]
+    def get_project_name(self, obj):
+        return obj.name
+
+    def get_done(self, obj):
+        return False if obj.status < 2 else True
 
 
 class ProjectReportSerializer (serializers.ModelSerializer):

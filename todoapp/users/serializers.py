@@ -65,10 +65,27 @@ class ProjectStatsSerializer (serializers.ModelSerializer):
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
+    confirm_password = serializers.CharField(write_only=True)
+
     class Meta:
         model = CustomUser
         fields = ['id', 'first_name', 'last_name',
-                  'email', 'password', 'date_joined']
+                  'email', 'password', 'confirm_password', 'date_joined']
+
+    def validate(self, data):
+        password = data.get('password')
+        confirm_password = data.get('confirm_password')
+
+        if password != confirm_password:
+            raise serializers.ValidationError(
+                "Password and Confirm Password do not match.")
+
+        return data
+
+    def create(self, validated_data):
+        validated_data.pop('confirm_password', None)
+        user = CustomUser.objects.create_user(**validated_data)
+        return user
 
 
 class UserLoginSerializer(serializers.Serializer):

@@ -43,7 +43,7 @@ class UserRegistrationAPIView(mixins.CreateModelMixin, GenericAPIView):
         return response_data
 
 
-class UserLoginAPIView(mixins.CreateModelMixin, GenericAPIView):
+class UserLoginAPIView(GenericAPIView):
     """
         success response format
          {
@@ -62,8 +62,8 @@ class UserLoginAPIView(mixins.CreateModelMixin, GenericAPIView):
         user = authenticate(email=email, password=password)
 
         if user is None:
-            raise AuthenticationFailed("Invalid username or password.")
+            return Response("Incorrect email or password", status=status.HTTP_400_BAD_REQUEST)
 
         token, created = Token.objects.get_or_create(user=user)
 
-        return Response({"token": token.key}, status=status.HTTP_200_OK)
+        return Response({"auth_token": token.key}, status=status.HTTP_200_OK)
