@@ -2,11 +2,8 @@ from rest_framework import serializers
 
 from todos.models import Todo
 
-from users.serializers import UserSerializer
-
 
 class TodoSerializer (serializers.ModelSerializer):
-    # creator = UserSerializer(source='user')
     creator = serializers.SerializerMethodField()
     status = serializers.SerializerMethodField()
     created_at = serializers.SerializerMethodField()
@@ -59,3 +56,4 @@ class TodoCreateSerializer (serializers.ModelSerializer):
     class Meta:
         model = Todo
         fields = ['id', 'name', 'done', 'date_created', 'user']
+        read_only_fields = ['user']
