@@ -13,13 +13,18 @@ class Project(models.Model):
     name = models.CharField(max_length=100)
     max_members = models.PositiveIntegerField()
 
+    class status(enumerate):
+        TO_BE_STARTED = 0
+        IN_PROGRESS = 1
+        COMPLETED = 2
+
     CHOICES = [
-        (0, "To be started"),
-        (1, "In Progress"),
-        (2, "Completed")
+        (status.TO_BE_STARTED, "To be started"),
+        (status.IN_PROGRESS, "In Progress"),
+        (status.COMPLETED, "Completed")
     ]
 
-    status = models.IntegerField(choices=CHOICES, default=TO_BE_STARTED)
+    status = models.IntegerField(choices=CHOICES, default=status.TO_BE_STARTED)
 
     def __str__(self):
         return f"{self.name}"

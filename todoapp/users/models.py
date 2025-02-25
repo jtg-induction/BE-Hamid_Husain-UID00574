@@ -34,9 +34,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     date_joined = models.DateTimeField(default=now)
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     """
     Needed fields
